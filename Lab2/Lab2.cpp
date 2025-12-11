@@ -10,9 +10,6 @@ void printHeader() {
 }
 
 int main() {
-    locale::global(locale("uk_UA.UTF-8"));
-    system("chcp 65001");
-
     Element elem1(93, "Neptunium", 237, 220000);
     Element elem2(97, "Berkelium", 247, 700);
     Element result;
