@@ -2,50 +2,68 @@
 #define CLASSES_H
 
 #include <iostream>
-using namespace std;
 
 class B1 {
 protected:
-    int b1;
+    int x;
 public:
-    B1(int val);
-    virtual void show();
-    friend ostream& operator<<(ostream& out, const B1& obj);
+    B1(int v);
+    virtual void show() const;
+    friend std::ostream& operator<<(std::ostream& os, const B1& o);
 };
 
 class B2 {
 protected:
-    int b2;
+    int x;
 public:
-    B2(int val);
-    virtual void show();
-    friend ostream& operator<<(ostream& out, const B2& obj);
+    B2(int v);
+    virtual void show() const;
+    friend std::ostream& operator<<(std::ostream& os, const B2& o);
 };
 
-class D1 : private B1, public B2 {
+class B3 {
 protected:
-    int d1;
+    int x;
 public:
-    D1(int val, int b1val, int b2val);
-    void show() override;
-    friend ostream& operator<<(ostream& out, const D1& obj);
+    B3(int v);
+    virtual void show() const;
+    friend std::ostream& operator<<(std::ostream& os, const B3& o);
 };
 
-class D2 : public B1, private B2 {
+class D1 : private B1, public B2, protected virtual B3 {
 protected:
-    int d2;
+    int x;
 public:
-    D2(int val, int b1val, int b2val);
-    void show() override;
-    friend ostream& operator<<(ostream& out, const D2& obj);
+    D1(int b1, int b2, int b3, int d1);
+    virtual void show() const override;
+    friend std::ostream& operator<<(std::ostream& os, const D1& o);
 };
 
-class D3 : private D1, public D2 {
-    int d3;
+class D2 : private virtual B3, public D1 {
+protected:
+    int x;
 public:
-    D3(int val, int d1val, int d2val, int b1val_d1, int b2val_d1, int b1val_d2, int b2val_d2);
-    void show() override;
-    friend ostream& operator<<(ostream& out, const D3& obj);
+    D2(int b3, int b1, int b2, int d1, int d2);
+    virtual void show() const override;
+    friend std::ostream& operator<<(std::ostream& os, const D2& o);
+};
+
+class D3 : public virtual B3 {
+protected:
+    int x;
+public:
+    D3(int b3, int d3);
+    virtual void show() const override;
+    friend std::ostream& operator<<(std::ostream& os, const D3& o);
+};
+
+class D4 : protected D2 {
+protected:
+    int x;
+public:
+    D4(int b3, int b1, int b2, int d1, int d2, int d4);
+    virtual void show() const override;
+    friend std::ostream& operator<<(std::ostream& os, const D4& o);
 };
 
 #endif

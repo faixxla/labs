@@ -1,57 +1,57 @@
-#include "Classes.h"
+#include "classes.h"
 
-B1::B1(int val) : b1(val) {}
-void B1::show() {
-    cout << "B1: " << b1 << endl;
-}
-ostream& operator<<(ostream& out, const B1& obj) {
-    return out << "B1: " << obj.b1;
+B1::B1(int v) : x(v) {}
+void B1::show() const { std::cout << "B1: " << x << "\n"; }
+std::ostream& operator<<(std::ostream& os, const B1& o) { return os << "B1(" << o.x << ")"; }
+
+B2::B2(int v) : x(v) {}
+void B2::show() const { std::cout << "B2: " << x << "\n"; }
+std::ostream& operator<<(std::ostream& os, const B2& o) { return os << "B2(" << o.x << ")"; }
+
+B3::B3(int v) : x(v) {}
+void B3::show() const { std::cout << "B3: " << x << "\n"; }
+std::ostream& operator<<(std::ostream& os, const B3& o) { return os << "B3(" << o.x << ")"; }
+
+D1::D1(int b1, int b2, int b3, int d1)
+    : B1(b1), B2(b2), B3(b3), x(d1) {
 }
 
-B2::B2(int val) : b2(val) {}
-void B2::show() {
-    cout << "B2: " << b2 << endl;
-}
-ostream& operator<<(ostream& out, const B2& obj) {
-    return out << "B2: " << obj.b2;
-}
-
-D1::D1(int val, int b1val, int b2val) : B1(b1val), B2(b2val), d1(val) {}
-void D1::show() {
+void D1::show() const {
+    std::cout << "D1: " << x << "\n";
     B1::show();
     B2::show();
-    cout << "D1: " << d1 << endl;
-}
-ostream& operator<<(ostream& out, const D1& obj) {
-    out << static_cast<const B1&>(obj) << ", "
-        << static_cast<const B2&>(obj) << ", D1: " << obj.d1;
-    return out;
+    B3::show();
 }
 
-D2::D2(int val, int b1val, int b2val) : B1(b1val), B2(b2val), d2(val) {}
-void D2::show() {
-    B1::show();
-    B2::show();
-    cout << "D2: " << d2 << endl;
-}
-ostream& operator<<(ostream& out, const D2& obj) {
-    out << static_cast<const B1&>(obj) << ", "
-        << static_cast<const B2&>(obj) << ", D2: " << obj.d2;
-    return out;
+std::ostream& operator<<(std::ostream& os, const D1& o) { return os << "D1(" << o.x << ")"; }
+
+D2::D2(int b3, int b1, int b2, int d1, int d2)
+    : B3(b3), D1(b1, b2, b3, d1), x(d2) {
 }
 
-D3::D3(int val, int d1val, int d2val, int b1val_d1, int b2val_d1, int b1val_d2, int b2val_d2)
-    : D1(d1val, b1val_d1, b2val_d1), D2(d2val, b1val_d2, b2val_d2), d3(val) {
-}
-
-void D3::show() {
+void D2::show() const {
+    std::cout << "D2: " << x << "\n";
     D1::show();
-    D2::show();
-    cout << "D3: " << d3 << endl;
 }
 
-ostream& operator<<(ostream& out, const D3& obj) {
-    out << static_cast<const D1&>(obj) << "\n"
-        << static_cast<const D2&>(obj) << "\nD3: " << obj.d3;
-    return out;
+std::ostream& operator<<(std::ostream& os, const D2& o) { return os << "D2(" << o.x << ")"; }
+
+D3::D3(int b3, int d3) : B3(b3), x(d3) {}
+
+void D3::show() const {
+    std::cout << "D3: " << x << "\n";
+    B3::show();
 }
+
+std::ostream& operator<<(std::ostream& os, const D3& o) { return os << "D3(" << o.x << ")"; }
+
+D4::D4(int b3, int b1, int b2, int d1, int d2, int d4)
+    : B3(b3), D2(b3, b1, b2, d1, d2), x(d4) {
+}
+
+void D4::show() const {
+    std::cout << "D4: " << x << "\n";
+    D2::show();
+}
+
+std::ostream& operator<<(std::ostream& os, const D4& o) { return os << "D4(" << o.x << ")"; }

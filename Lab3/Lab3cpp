@@ -1,15 +1,20 @@
-#include "Classes.h"
+#include "classes.h"
 
 int main() {
-    setlocale(LC_ALL, "ukr");
-    system("chcp 65001");
-    D3 obj(100, 10, 20, 1, 2, 3, 4);
+    D1 d1(1,2,3,4);
+    D2 d2(10,20,30,40,50);
+    D3 d3(100,200);
+    D4 d4(5,6,7,8,9,10);
 
-    cout << "--- Метод show() ---" << endl;
-    obj.show();
+    d1.show();
+    d2.show();
+    d3.show();
+    d4.show();
 
-    cout << "\n--- Оператор << ---" << endl;
-    cout << obj << endl;
+    std::cout << d1 << "\n";
+    std::cout << d2 << "\n";
+    std::cout << d3 << "\n";
+    std::cout << d4 << "\n";
 
     return 0;
 }
