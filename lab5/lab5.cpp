@@ -1,45 +1,67 @@
+#include "Number.h"
+#include "STLTasks.h"
 #include <iostream>
-#include <stdexcept>
-#include "Tasks.h"
-using namespace std;
+#include <vector>
+#include <list>
+#include <map>
 
 int main() {
-    setlocale(LC_ALL, "ukr");
-    system("chcp 65001");
     try {
-        cout << "=== Завдання 5.1: NumericBox ===\n";
-        NumericBox<int>    a;// за замовчуванням
-        NumericBox<int>    b(10);// з параметром
-        NumericBox<double> c(2.5);
+        std::cout << "=== Завдання 5.1: Шаблонний клас ===" << std::endl;
 
-        cout << "a = "; a.print(); 
-        cout << "\n";
-        cout << "b = " << b << "\n";
-        cout << "c = " << c << "\n";
+        Number<int> n1(5), n2(10);
+        n1.print(); 
+        n2.print(); 
 
-        a = b;
-        cout << "Після a = b: a = " << a << "\n";
+        n1 = n2;
+        n1.print();
 
-        b = NumericBox<double>(7.9);
-        cout << "Після b = NumericBox<double>(7.9): b = " << b << "\n";
+        int sumInt = n1 + n2;
+        std::cout << "Сума цілих: " << sumInt << std::endl;
 
-        auto d = b + c;
-        cout << "d = b + c = " << d << "\n";
+        Number<double> d1(3.5), d2(2.5);
+        d1.print(); 
+        d2.print();
 
-        cout << "\n=== Завдання 5.2.1: Vector (скалярний добуток) ===\n";
-        VectorTask::runFromFile("./data/vectors.txt");
+        d1 = d2;
+        d1.print();
 
-        cout << "\n=== Завдання 5.2.2: List (видалення першого і останнього) ===\n";
-        ListTask::runFromFile("./data/list_input.txt");
+        double sumDouble = d1 + d2;
+        std::cout << "Сума дійсних: " << sumDouble << std::endl;
 
-        cout << "\n=== Завдання 5.2.3: Map (студенти, які не склали) ===\n";
-        MapTask::runFromFile("./data/students.txt");
+        auto sumMixed = n1 + d1;
+        std::cout << "Сума змішаних типів: " << sumMixed << std::endl;
 
-        cout << "\nУсе виконано успішно.\n";
+        std::cout << "\n=== Завдання 5.2: STL Контейнери ===" << std::endl;
+        std::vector<int> vec = { 1, 2, 2, 3, 4, 4, 5 };
+        removeDuplicates(vec);
+        std::cout << "Унікальні значення вектора: ";
+        for (int v : vec) std::cout << v << " ";
+        std::cout << std::endl;
+
+        std::list<int> lst = { 1, 2, 3, 4, 5 };
+        std::cout << "Перевірка списку: ";
+        if (isSorted(lst)) std::cout << "Список впорядкований." << std::endl;
+        else std::cout << "Список не впорядкований." << std::endl;
+
+        lst.push_back(0);
+        std::cout << "Перевірка списку після додавання 0: ";
+        if (isSorted(lst)) std::cout << "Список впорядкований." << std::endl;
+        else std::cout << "Список не впорядкований." << std::endl;
+
+        std::map<std::string, int> students = { {"Alice", 90}, {"Bob", 85} };
+        addOrUpdateStudent(students, "Charlie", 95);
+        addOrUpdateStudent(students, "Alice", 92);
+
+        std::cout << "Список студентів та оцінки:" << std::endl;
+        for (const auto& student : students) {
+            std::cout << student.first << ": " << student.second << std::endl;
+        }
+
     }
-    catch (const exception& ex) {
-        cerr << "\n[main] Фатальна помилка: " << ex.what() << "\n";
-        return 1;
+    catch (const std::exception& e) {
+        std::cerr << "Помилка: " << e.what() << std::endl;
     }
+
     return 0;
 }
