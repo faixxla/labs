@@ -6,46 +6,45 @@
 
 using namespace std;
 
-void fillCultures(Culture* arr, int size) {
-#ifdef DEBUG
-    cout << "[DEBUG] Start fillCultures() - " << __DATE__ << " " << __TIME__ << endl;
-#endif
+void fillElements(Element* arr, int size) {
 
 #if PRINT_TYPE == 1
     for (int i = 0; i < size; ++i) {
-        wcout << L"Введіть найменування культури: ";
+        wcout << L"Введіть атомний номер: ";
+        wcin >> arr[i].atomicNumber;
+        wcout << L"Введіть назву елемента: ";
         wcin >> arr[i].name;
-        wcout << L"Введіть тип (Б/З): ";
-        wcin >> arr[i].type;
-        wcout << L"Введіть посівну площу (га): ";
-        wcin >> arr[i].area;
-        wcout << L"Введіть врожайність (ц/га): ";
-        wcin >> arr[i].vro;
+        wcout << L"Введіть масове число: ";
+        wcin >> arr[i].massNumber;
+        wcout << L"Введіть період напіврозпаду (років): ";
+        wcin >> arr[i].halfLife;
     }
 #elif PRINT_TYPE == 2
-    const wstring names[] = { L"Соя", L"Чумиза", L"Рис" };
-    const wchar_t types[] = { L'Б', L'З' };
-    srand(time(0));
+    const int atomicNumbers[] = { 93, 97, 98 };
+    const wstring names[] = { L"Нептуній", L"Берклій", L"Каліфорній" };
+    const int massNumbers[] = { 237, 247, 251 };
+    const int halfLives[] = { 220000, 700, 660 };
+
     for (int i = 0; i < size; ++i) {
-        arr[i].name = names[i];
-        arr[i].type = types[rand() % 2];
-        arr[i].area = rand() % 30000 + 1000;
-        arr[i].vro = rand() % 50 + 10;
+        if (i < 3) {
+            arr[i].atomicNumber = atomicNumbers[i];
+            arr[i].name = names[i];
+            arr[i].massNumber = massNumbers[i];
+            arr[i].halfLife = halfLives[i];
+        }
+        else {
+            arr[i].atomicNumber = 0;
+            arr[i].name = L"Пусто";
+            arr[i].massNumber = 0;
+            arr[i].halfLife = 0;
+        }
     }
 #else
 #error Invalid PRINT_TYPE
 #endif
-
-#ifdef DEBUG
-    cout << "[DEBUG] End fillCultures() - File: " << __FILE__ << " Function: " << __func__ << endl;
-#endif
 }
 
-void sortCultures(Culture* arr, int size) {
-#ifdef DEBUG
-    cout << "[DEBUG] Start sortCultures() - " << __DATE__ << " " << __TIME__ << endl;
-#endif
-
+void sortElements(Element* arr, int size) {
     for (int i = 0; i < size - 1; ++i) {
         for (int j = 0; j < size - i - 1; ++j) {
             if (arr[j].name > arr[j + 1].name) {
@@ -53,30 +52,22 @@ void sortCultures(Culture* arr, int size) {
             }
         }
     }
-
-#ifdef DEBUG
-    cout << "[DEBUG] End sortCultures() - File: " << __FILE__ << " Function: " << __func__ << endl;
-#endif
 }
 
-void printCultures(const Culture* arr, int size) {
-#ifdef DEBUG
-    cout << "[DEBUG] Start printCultures() - " << __DATE__ << " " << __TIME__ << endl;
-#endif
+void printElements(const Element* arr, int size) {
 
-    wcout << setw(20) << L"Найменування"
-        << setw(10) << L"Тип"
-        << setw(20) << L"Площа (га)"
-        << setw(20) << L"Врожайність (ц/га)" << endl;
+
+    wcout << L"-------------------------------------------------------------------------------" << endl;
+    wcout << setw(10) << L"Атом. №"
+        << setw(15) << L"Назва"
+        << setw(15) << L"Масове число"
+        << setw(25) << L"Період напіврозпаду" << endl;
+    wcout << L"-------------------------------------------------------------------------------" << endl;
 
     for (int i = 0; i < size; ++i) {
-        wcout << setw(20) << arr[i].name
-            << setw(10) << arr[i].type
-            << setw(20) << arr[i].area
-            << setw(20) << arr[i].vro << endl;
+        wcout << setw(10) << arr[i].atomicNumber
+            << setw(15) << arr[i].name
+            << setw(15) << arr[i].massNumber
+            << setw(25) << arr[i].halfLife << endl;
     }
-
-#ifdef DEBUG
-    cout << "[DEBUG] End printCultures() - File: " << __FILE__ << " Function: " << __func__ << endl;
-#endif
 }

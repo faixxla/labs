@@ -1,16 +1,15 @@
 ﻿#pragma once
 #include <string>
 
-#define PRINT_TYPE 2
-#define DEBUG
+#define PRINT_TYPE 2 // 1 - user input, 2 - predefined data
 
-struct Culture {
+struct Element {
+    int atomicNumber;
     std::wstring name;
-    wchar_t type;
-    int area;
-    int vro;
+    int massNumber;
+    int halfLife;
 };
 
-void fillCultures(Culture* arr, int size);
-void sortCultures(Culture* arr, int size);
-void printCultures(const Culture* arr, int size);
+void fillElements(Element* arr, int size);
+void sortElements(Element* arr, int size);
+void printElements(const Element* arr, int size);

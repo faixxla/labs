@@ -9,13 +9,13 @@ int main() {
     system("chcp 65001");
 
     const int SIZE = 3;
-    Culture arr[SIZE];
+    Element arr[SIZE];
     int choice;
 
     do {
         wcout << L"\nМЕНЮ:\n";
         wcout << L"1. Заповнити структуру\n";
-        wcout << L"2. Відсортувати структуру за найменуванням\n";
+        wcout << L"2. Відсортувати структуру за назвою\n";
         wcout << L"3. Надрукувати структуру\n";
         wcout << L"4. Вихід\n";
         wcout << L"Ваш вибір: ";
@@ -23,13 +23,13 @@ int main() {
 
         switch (choice) {
         case 1:
-            fillCultures(arr, SIZE);
+            fillElements(arr, SIZE);
             break;
         case 2:
-            sortCultures(arr, SIZE);
+            sortElements(arr, SIZE);
             break;
         case 3:
-            printCultures(arr, SIZE);
+            printElements(arr, SIZE);
             break;
         case 4:
             wcout << L"Завершення програми...\n";
@@ -42,4 +42,3 @@ int main() {
 
     return 0;
 }
-
