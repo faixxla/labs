@@ -1,15 +1,16 @@
 ﻿#pragma once
 #include <fstream>
 using namespace std;
-class Crop {
+
+class Element {
 private:
+    int atomicNumber;
     char name[30];
-    char type;
-    double area;
-    double vro;
+    int massNumber;
+    double halfLife;
 
 public:
-    Crop();
+    Element();
     void input();
     void display() const;
 

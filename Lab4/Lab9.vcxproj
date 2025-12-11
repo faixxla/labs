@@ -24,6 +24,7 @@
     <ProjectGuid>{54200a93-b530-4275-b7e1-2d83663cad32}</ProjectGuid>
     <RootNamespace>Lab9</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Lab4</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,11 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="crop.cpp" />
-    <ClCompile Include="Lab9.cpp" />
+    <ClCompile Include="Element.cpp" />
+    <ClCompile Include="Lab4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="crop.h" />
+    <ClInclude Include="Element.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
